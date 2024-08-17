@@ -17,7 +17,6 @@ public class Main {
         while (true) {
             printMenu();
             String command = scanner.nextLine();
-            ArrayList<String> typeItems = new ArrayList<>();
 
             switch (command) {
                 case "1":
@@ -28,26 +27,22 @@ public class Main {
                     dc.addNewDish(dishType, dishName);
                     break;
                 case "2":
+                    ArrayList<String> typeItems = new ArrayList<>();
                     System.out.println("Начинаем конструировать обед...");
                     System.out.println("Введите количество наборов, которые нужно сгенерировать:");
                     String number = scanner.nextLine();
                     int numberOfCombos = Integer.parseInt(number);
-                    System.out.println("Вводите типы блюда, разделяя символом переноса строки (enter). Для завершения ввода введите пустую строку");
+                    System.out.println("Вводите типы блюда, разделяя символом переноса строки (enter). " +
+                            "Для завершения ввода введите пустую строку");
                     String nextItem = scanner.nextLine();
-                    if (dc.checkType(nextItem)) {
-                        typeItems.add(nextItem);
-                    } else {
-                        System.out.println("Такого типа блюда нет! Добавьте его в воду.");
-                        break;
-                    }
                     while (!nextItem.isEmpty()) {
-                        nextItem = scanner.nextLine();
                         if (dc.checkType(nextItem)) {
                             typeItems.add(nextItem);
                         } else {
-                            System.out.println("Такого типа блюда нет! Добавьте его в воду.");
-                            break;
+                            System.out.println("Такого типа блюда нет! Добавьте его в воду."); //потому что "Делай добро и бросай его в воду".
+                            // Добавь блюдо в меню=сделай добро.
                         }
+                        nextItem = scanner.nextLine();
                     }
                     dc.generateDishCombo(numberOfCombos, typeItems);
                     break;
